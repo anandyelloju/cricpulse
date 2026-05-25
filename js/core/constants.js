@@ -1,5 +1,25 @@
 export const MATCH_STATUS = {
   NOT_STARTED: 'NOT_STARTED',
   LIVE: 'LIVE',
+  INNINGS_BREAK: 'INNINGS_BREAK',
   COMPLETED: 'COMPLETED'
+};
+
+export const INNINGS_STATUS = {
+  NOT_STARTED: 'NOT_STARTED',
+  LIVE: 'LIVE',
+  COMPLETED: 'COMPLETED'
+};
+
+export const BALL_EVENT_TYPES = {
+  RUN: 'RUN',
+  EXTRA: 'EXTRA',
+  WICKET: 'WICKET'
+};
+
+export const EXTRA_TYPES = {
+  WIDE: 'WIDE',
+  NO_BALL: 'NO_BALL',
+  BYE: 'BYE',
+  LEG_BYE: 'LEG_BYE'
 };
