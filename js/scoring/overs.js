@@ -1,4 +1,4 @@
-import { state } from '../core/state.js';
+import { state } from "../core/state.js";
 
 export function updateOverProgress() {
   state.innings.balls += 1;
@@ -14,9 +14,13 @@ export function updateOverProgress() {
 export function rotateStrike() {
   const currentStriker = state.innings.striker;
 
-  state.innings.striker =
-    state.innings.nonStriker;
+  state.innings.striker = state.innings.nonStriker;
 
-  state.innings.nonStriker =
-    currentStriker;
+  state.innings.nonStriker = currentStriker;
+}
+
+export function updateBowlerOvers() {
+  const bowler = state.innings.currentBowler;
+
+  bowler.overs = `${state.innings.overs}.${state.innings.balls}`;
 }

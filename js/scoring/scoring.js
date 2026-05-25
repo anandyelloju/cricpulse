@@ -2,6 +2,7 @@ import { addRuns } from "./runs.js";
 import { addWide, addNoBall, addBye, addLegBye } from "./extras.js";
 import { addWicket } from "./wickets.js";
 import { undoLastEvent } from "./undo.js";
+import { endInnings } from "./innings.js";
 
 export function handleScore(runs) {
   addRuns(runs);
@@ -29,4 +30,8 @@ export function handleWicket() {
 
 export function handleUndo() {
   undoLastEvent();
+}
+
+export function handleEndInnings() {
+  endInnings();
 }

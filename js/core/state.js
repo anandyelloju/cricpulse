@@ -21,6 +21,8 @@ export const state = {
     battingFirst: null,
 
     currentInnings: 1,
+
+    winner: null,
   },
 
   innings: {

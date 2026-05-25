@@ -6,6 +6,7 @@ import {
   handleLegBye,
   handleWicket,
   handleUndo,
+  handleEndInnings,
 } from "../scoring/scoring.js";
 
 import { renderUI } from "../ui/render.js";
@@ -67,6 +68,14 @@ function handleControls(event) {
 
   if (undoButton) {
     handleUndo();
+
+    renderUI();
+  }
+
+  const endInningsButton = event.target.closest('[data-action="end-innings"]');
+
+  if (endInningsButton) {
+    handleEndInnings();
 
     renderUI();
   }

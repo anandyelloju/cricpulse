@@ -100,6 +100,12 @@ export function renderControls() {
             Undo
           </button>
 
+          <button
+            data-action="end-innings"
+            class="bg-yellow-500 hover:bg-yellow-600 text-white py-4 rounded-lg font-semibold"
+          >
+            End Innings
+          </button>
         </div>
       </div>
     </div>

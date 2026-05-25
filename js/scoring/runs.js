@@ -1,15 +1,18 @@
 import { state } from "../core/state.js";
 import { generateId } from "../core/utils.js";
-import { rotateStrike, updateOverProgress } from "./overs.js";
+import { rotateStrike, updateBowlerOvers, updateOverProgress } from "./overs.js";
 import { recordEvent } from "./undo.js";
+import { checkMatchWinner } from "./innings.js";
 
 export function addRuns(runs) {
   const striker = state.innings.striker;
+  const bowler = state.innings.currentBowler;
 
   state.innings.totalRuns += runs;
 
   striker.runs += runs;
   striker.balls += 1;
+  bowler.runsConceded += runs;
 
   if (runs === 4) {
     striker.fours += 1;
@@ -25,12 +28,14 @@ export function addRuns(runs) {
   });
 
   createBallEvent(runs);
-
   updateOverProgress();
 
   if (runs % 2 !== 0) {
     rotateStrike();
   }
+
+  updateBowlerOvers();
+  checkMatchWinner();
 }
 
 function createBallEvent(runs) {

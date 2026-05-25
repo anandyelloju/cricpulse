@@ -1,7 +1,8 @@
 import { state } from "../core/state.js";
 import { generateId } from "../core/utils.js";
-import { updateOverProgress } from "./overs.js";
+import { updateOverProgress, updateBowlerOvers } from "./overs.js";
 import { recordEvent } from "./undo.js";
+import { endInnings } from "./innings.js";
 
 export function addWicket() {
   recordEvent({
@@ -9,19 +10,17 @@ export function addWicket() {
   });
 
   const striker = state.innings.striker;
+  const bowler = state.innings.currentBowler;
 
   striker.isOut = true;
-
   striker.balls += 1;
-
   state.innings.wickets += 1;
+  bowler.wickets += 1;
 
   createWicketEvent();
-
   updateOverProgress();
-
   assignNextBatter();
-
+  updateBowlerOvers();
   checkInningsCompletion();
 }
 
@@ -62,6 +61,6 @@ function checkInningsCompletion() {
   const totalPlayers = state.innings.battingTeam.players.length;
 
   if (state.innings.wickets >= totalPlayers - 1) {
-    alert("Innings Complete");
+    endInnings();
   }
 }

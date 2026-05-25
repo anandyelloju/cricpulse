@@ -3,9 +3,25 @@ import { generateId } from "../core/utils.js";
 import { EXTRA_TYPES } from "../core/constants.js";
 import { rotateStrike, updateOverProgress } from "./overs.js";
 import { recordEvent } from "./undo.js";
+import { endInnings, checkMatchWinner } from "./innings.js";
+
+function checkChaseCompletion() {
+  if (
+    state.match.currentInnings === 2 &&
+    state.innings.target &&
+    state.innings.totalRuns >= state.innings.target
+  ) {
+    endInnings();
+    return true;
+  }
+  return false;
+}
 
 export function addWide() {
   state.innings.totalRuns += 1;
+  const bowler = state.innings.currentBowler;
+
+  bowler.runsConceded += 1;
 
   recordEvent({
     action: "WIDE",
@@ -15,10 +31,15 @@ export function addWide() {
     extraType: EXTRA_TYPES.WIDE,
     runs: 1,
   });
+
+  checkMatchWinner();
 }
 
 export function addNoBall() {
   state.innings.totalRuns += 1;
+  const bowler = state.innings.currentBowler;
+
+  bowler.runsConceded += 1;
 
   recordEvent({
     action: "NO_BALL",
@@ -28,6 +49,8 @@ export function addNoBall() {
     extraType: EXTRA_TYPES.NO_BALL,
     runs: 1,
   });
+
+  checkMatchWinner();
 }
 
 export function addBye(runs) {
@@ -52,6 +75,8 @@ export function addBye(runs) {
   if (runs % 2 !== 0) {
     rotateStrike();
   }
+
+  checkMatchWinner();
 }
 
 export function addLegBye(runs) {
@@ -76,6 +101,8 @@ export function addLegBye(runs) {
   if (runs % 2 !== 0) {
     rotateStrike();
   }
+
+  checkMatchWinner();
 }
 
 function createExtraEvent({ extraType, runs }) {
