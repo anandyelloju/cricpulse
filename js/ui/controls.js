@@ -106,6 +106,13 @@ export function renderControls() {
           >
             End Innings
           </button>
+
+          <button
+            data-action="reset-match"
+            class="bg-red-700 hover:bg-red-800 text-white py-4 rounded-lg font-semibold"
+          >
+            Reset Match
+          </button>
         </div>
       </div>
     </div>

@@ -8,8 +8,9 @@ import {
   handleUndo,
   handleEndInnings,
 } from "../scoring/scoring.js";
-
 import { renderUI } from "../ui/render.js";
+import { saveMatchState } from "../core/storage.js";
+import { resetMatch } from "./matchController.js";
 
 export function initializeScoringControls() {
   document.addEventListener("click", handleControls);
@@ -24,6 +25,7 @@ function handleControls(event) {
     handleScore(runs);
 
     renderUI();
+    saveMatchState();
 
     return;
   }
@@ -52,6 +54,7 @@ function handleControls(event) {
     }
 
     renderUI();
+    saveMatchState();
 
     return;
   }
@@ -62,6 +65,7 @@ function handleControls(event) {
     handleWicket();
 
     renderUI();
+    saveMatchState();
   }
 
   const undoButton = event.target.closest('[data-action="undo"]');
@@ -70,6 +74,7 @@ function handleControls(event) {
     handleUndo();
 
     renderUI();
+    saveMatchState();
   }
 
   const endInningsButton = event.target.closest('[data-action="end-innings"]');
@@ -78,5 +83,18 @@ function handleControls(event) {
     handleEndInnings();
 
     renderUI();
+    saveMatchState();
+  }
+
+  const resetButton = event.target.closest('[data-action="reset-match"]');
+
+  if (resetButton) {
+    const confirmed = confirm("Reset current match?");
+
+    if (!confirmed) {
+      return;
+    }
+
+    resetMatch();
   }
 }
