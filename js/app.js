@@ -1,0 +1,1 @@
+console.log('CricPulse App Initialized');

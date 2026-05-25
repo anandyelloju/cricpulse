@@ -1,0 +1,5 @@
+export const MATCH_STATUS = {
+  NOT_STARTED: 'NOT_STARTED',
+  LIVE: 'LIVE',
+  COMPLETED: 'COMPLETED'
+};
