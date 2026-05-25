@@ -1,5 +1,9 @@
 import { state } from './core/state.js';
+
 import { renderUI } from './ui/render.js';
+
+import { initializeScoringControls }
+  from './controllers/scoringController.js';
 
 import { mockMatch } from '../data/mockData.js';
 
@@ -26,6 +30,8 @@ function bootstrap() {
   initializeMatch();
 
   renderUI();
+
+  initializeScoringControls();
 }
 
 bootstrap();
