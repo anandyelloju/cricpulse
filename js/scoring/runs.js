@@ -38,6 +38,7 @@ function createBallEvent(runs) {
     ball: state.innings.balls,
 
     type: 'RUN',
+    extraType: null,
 
     runs,
 
