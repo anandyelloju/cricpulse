@@ -1,12 +1,11 @@
-import { state } from '../core/state.js';
+import { state } from "../core/state.js";
 
 export function renderBattingCard() {
-  const battingRoot = document.getElementById('batting-root');
+  const battingRoot = document.getElementById("batting-root");
 
   if (!battingRoot) return;
 
-  const players =
-    state.innings.battingTeam?.players || [];
+  const players = state.innings.battingTeam?.players || [];
 
   battingRoot.innerHTML = `
     <div class="overflow-x-auto">
@@ -27,12 +26,16 @@ export function renderBattingCard() {
 
         <tbody>
 
-          ${players.map(player => `
+          ${players
+            .map(
+              (player) => `
             <tr class="border-b">
 
               <td class="py-2">
                 ${player.name}
-              </td>
+
+                ${player.isOut ? '<span class="text-red-600 text-sm">(out)</span>' : ""}
+            </td>
 
               <td class="text-center">
                 ${player.runs || 0}
@@ -51,7 +54,9 @@ export function renderBattingCard() {
               </td>
 
             </tr>
-          `).join('')}
+          `,
+            )
+            .join("")}
 
         </tbody>
 

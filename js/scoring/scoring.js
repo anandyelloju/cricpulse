@@ -1,11 +1,8 @@
-import { addRuns } from './runs.js';
+import { addRuns } from "./runs.js";
 
-import {
-  addWide,
-  addNoBall,
-  addBye,
-  addLegBye
-} from './extras.js';
+import { addWide, addNoBall, addBye, addLegBye } from "./extras.js";
+
+import { addWicket } from "./wickets.js";
 
 export function handleScore(runs) {
   addRuns(runs);
@@ -25,4 +22,8 @@ export function handleBye(runs) {
 
 export function handleLegBye(runs) {
   addLegBye(runs);
+}
+
+export function handleWicket() {
+  addWicket();
 }

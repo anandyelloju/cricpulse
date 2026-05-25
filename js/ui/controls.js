@@ -1,6 +1,5 @@
 export function renderControls() {
-  const controlsRoot =
-    document.getElementById('controls-root');
+  const controlsRoot = document.getElementById("controls-root");
 
   if (!controlsRoot) return;
 
@@ -16,14 +15,18 @@ export function renderControls() {
 
         <div class="grid grid-cols-3 md:grid-cols-6 gap-3">
 
-          ${runValues.map(run => `
+          ${runValues
+            .map(
+              (run) => `
             <button
               data-run="${run}"
               class="bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-lg font-semibold"
             >
               ${run}
             </button>
-          `).join('')}
+          `,
+            )
+            .join("")}
 
         </div>
       </div>
@@ -64,6 +67,22 @@ export function renderControls() {
           >
             Leg Bye
           </button>
+
+        </div>
+      </div>
+
+      <div>
+        <h3 class="font-semibold mb-3">
+            Wickets
+        </h3>
+
+        <div class="grid grid-cols-2 gap-3">
+
+            <button data-action="wicket"
+            class="bg-red-600 hover:bg-red-700 text-white py-4 rounded-lg font-semibold"
+            >
+                Wicket
+            </button>
 
         </div>
       </div>

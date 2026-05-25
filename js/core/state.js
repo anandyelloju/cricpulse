@@ -44,6 +44,8 @@ export const state = {
     nonStriker: null,
     currentBowler: null,
 
+    nextBatterIndex: 2,
+
     target: null,
 
     ballHistory: []

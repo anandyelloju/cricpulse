@@ -1,45 +1,50 @@
-import { state } from '../core/state.js';
+import { state } from "../core/state.js";
 
 export function renderHistory() {
-  const historyRoot =
-    document.getElementById('history-root');
+  const historyRoot = document.getElementById("history-root");
 
   if (!historyRoot) return;
 
-  const history =
-    [...state.innings.ballHistory].reverse();
+  const history = [...state.innings.ballHistory].reverse();
 
   historyRoot.innerHTML = `
     <div class="flex flex-wrap gap-2">
 
-      ${history.map(ball => `
+      ${history
+        .map(
+          (ball) => `
         <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center font-semibold text-sm">
 
           ${formatBallLabel(ball)}
 
         </div>
-      `).join('')}
+      `,
+        )
+        .join("")}
 
     </div>
   `;
 }
 
 function formatBallLabel(ball) {
-
-  if (ball.extraType === 'WIDE') {
-    return 'WD';
+  if (ball.extraType === "WIDE") {
+    return "WD";
   }
 
-  if (ball.extraType === 'NO_BALL') {
-    return 'NB';
+  if (ball.extraType === "NO_BALL") {
+    return "NB";
   }
 
-  if (ball.extraType === 'BYE') {
+  if (ball.extraType === "BYE") {
     return `B${ball.runs}`;
   }
 
-  if (ball.extraType === 'LEG_BYE') {
+  if (ball.extraType === "LEG_BYE") {
     return `LB${ball.runs}`;
+  }
+
+  if (ball.type === "WICKET") {
+    return "W";
   }
 
   return ball.runs;

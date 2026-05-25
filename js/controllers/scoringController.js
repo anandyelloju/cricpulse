@@ -3,72 +3,62 @@ import {
   handleWide,
   handleNoBall,
   handleBye,
-  handleLegBye
-} from '../scoring/scoring.js';
+  handleLegBye,
+  handleWicket,
+} from "../scoring/scoring.js";
 
-import { renderUI } from '../ui/render.js';
+import { renderUI } from "../ui/render.js";
 
 export function initializeScoringControls() {
-
-  initializeRunControls();
-
-  initializeExtraControls();
+  document.addEventListener("click", handleControls);
 }
 
-function initializeRunControls() {
-  const runButtons =
-    document.querySelectorAll('[data-run]');
+function handleControls(event) {
+  const runButton = event.target.closest("[data-run]");
 
-  runButtons.forEach(button => {
+  if (runButton) {
+    const runs = Number(runButton.dataset.run);
 
-    button.addEventListener('click', () => {
-      const runs =
-        Number(button.dataset.run);
+    handleScore(runs);
 
-      handleScore(runs);
+    renderUI();
 
-      renderUI();
+    return;
+  }
 
-      initializeScoringControls();
-    });
+  const extraButton = event.target.closest("[data-extra]");
 
-  });
-}
+  if (extraButton) {
+    const type = extraButton.dataset.extra;
 
-function initializeExtraControls() {
-  const extraButtons =
-    document.querySelectorAll('[data-extra]');
+    const runs = Number(extraButton.dataset.runs || 1);
 
-  extraButtons.forEach(button => {
+    if (type === "wide") {
+      handleWide();
+    }
 
-    button.addEventListener('click', () => {
+    if (type === "noball") {
+      handleNoBall();
+    }
 
-      const type =
-        button.dataset.extra;
+    if (type === "bye") {
+      handleBye(runs);
+    }
 
-      const runs =
-        Number(button.dataset.runs || 1);
+    if (type === "legbye") {
+      handleLegBye(runs);
+    }
 
-      if (type === 'wide') {
-        handleWide();
-      }
+    renderUI();
 
-      if (type === 'noball') {
-        handleNoBall();
-      }
+    return;
+  }
 
-      if (type === 'bye') {
-        handleBye(runs);
-      }
+  const wicketButton = event.target.closest('[data-action="wicket"]');
 
-      if (type === 'legbye') {
-        handleLegBye(runs);
-      }
+  if (wicketButton) {
+    handleWicket();
 
-      renderUI();
-
-      initializeScoringControls();
-    });
-
-  });
+    renderUI();
+  }
 }
