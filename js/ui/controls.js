@@ -87,6 +87,21 @@ export function renderControls() {
         </div>
       </div>
 
+      <div>
+        <h3 class="font-semibold mb-3">
+            Match Controls
+        </h3>
+
+        <div class="grid grid-cols-2 gap-3">
+
+          <button data-action="undo"
+            class="bg-gray-800 hover:bg-gray-900 text-white py-4 rounded-lg font-semibold"
+          >
+            Undo
+          </button>
+
+        </div>
+      </div>
     </div>
   `;
 }

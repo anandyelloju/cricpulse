@@ -1,10 +1,13 @@
 import { state } from "../core/state.js";
-
 import { generateId } from "../core/utils.js";
-
 import { updateOverProgress } from "./overs.js";
+import { recordEvent } from "./undo.js";
 
 export function addWicket() {
+  recordEvent({
+    action: "WICKET",
+  });
+
   const striker = state.innings.striker;
 
   striker.isOut = true;

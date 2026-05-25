@@ -5,6 +5,7 @@ import {
   handleBye,
   handleLegBye,
   handleWicket,
+  handleUndo,
 } from "../scoring/scoring.js";
 
 import { renderUI } from "../ui/render.js";
@@ -58,6 +59,14 @@ function handleControls(event) {
 
   if (wicketButton) {
     handleWicket();
+
+    renderUI();
+  }
+
+  const undoButton = event.target.closest('[data-action="undo"]');
+
+  if (undoButton) {
+    handleUndo();
 
     renderUI();
   }

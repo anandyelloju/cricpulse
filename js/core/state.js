@@ -1,29 +1,26 @@
-import {
-  MATCH_STATUS,
-  INNINGS_STATUS
-} from './constants.js';
+import { MATCH_STATUS, INNINGS_STATUS } from "./constants.js";
 
 export const state = {
   match: {
-    id: '',
+    id: "",
     status: MATCH_STATUS.NOT_STARTED,
 
     teamA: {
-      id: '',
-      name: '',
-      players: []
+      id: "",
+      name: "",
+      players: [],
     },
 
     teamB: {
-      id: '',
-      name: '',
-      players: []
+      id: "",
+      name: "",
+      players: [],
     },
 
     tossWinner: null,
     battingFirst: null,
 
-    currentInnings: 1
+    currentInnings: 1,
   },
 
   innings: {
@@ -48,8 +45,11 @@ export const state = {
 
     target: null,
 
-    ballHistory: []
-  }
+    eventHistory: [],
+    isReplaying: false,
+
+    ballHistory: [],
+  },
 };
 
 export function resetInningsState() {
@@ -73,6 +73,9 @@ export function resetInningsState() {
 
     target: null,
 
-    ballHistory: []
+    eventHistory: [],
+    isReplaying: false,
+
+    ballHistory: [],
   };
 }
