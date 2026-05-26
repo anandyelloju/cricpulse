@@ -13,7 +13,7 @@ export function renderHistory() {
       ${history
         .map(
           (ball) => `
-        <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center font-semibold text-sm">
+          <div class="score-pill rounded-full bg-gray-200 flex items-center justify-center font-semibold text-sm">
 
           ${formatBallLabel(ball)}
 

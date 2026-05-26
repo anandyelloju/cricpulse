@@ -1,7 +1,42 @@
 body {
   font-family: Arial, sans-serif;
+  background: #f3f4f6;
 }
 
 button {
   transition: 0.2s ease;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 999px;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}
+
+.score-pill {
+  min-width: 48px;
+  min-height: 48px;
+}
+
+@media (max-width: 768px) {
+
+  body {
+    font-size: 14px;
+  }
+
+  button {
+    font-size: 14px;
+  }
 }
