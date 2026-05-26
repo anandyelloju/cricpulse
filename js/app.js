@@ -2,10 +2,14 @@ import { state } from "./core/state.js";
 import { renderUI } from "./ui/render.js";
 import { initializeScoringControls } from "./controllers/scoringController.js";
 import { initializeMatchState } from "./controllers/matchController.js";
+import { initializeSetupPage } from "./controllers/setupController.js";
+import { initializeSummaryPage } from "./controllers/summaryController.js";
 import { mockMatch } from "../data/mockData.js";
 
 function initializeMatch() {
   state.match.id = mockMatch.id;
+  state.match.status = "LIVE";
+  state.match.maxOvers = 5;
 
   state.match.teamA = mockMatch.teamA;
 
@@ -20,9 +24,23 @@ function initializeMatch() {
   state.innings.nonStriker = mockMatch.teamA.players[1];
 
   state.innings.currentBowler = mockMatch.teamB.players[0];
+  state.innings.status = "LIVE";
 }
 
 function bootstrap() {
+  const page = document.body.dataset.page;
+
+  if (page === "setup") {
+    initializeSetupPage();
+    return;
+  }
+
+  if (page === "summary") {
+    initializeMatchState();
+    initializeSummaryPage();
+    return;
+  }
+
   const hasRestoredMatch = initializeMatchState();
 
   if (!hasRestoredMatch) {

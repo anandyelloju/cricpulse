@@ -11,19 +11,27 @@
   <link rel="stylesheet" href="./assets/css/style.css"/>
 </head>
 
-<body class="bg-gray-100 min-h-screen">
+<body class="min-h-screen bg-slate-50 text-slate-950" data-page="summary">
 
-  <div class="max-w-4xl mx-auto p-4">
+  <div class="mx-auto max-w-5xl px-4 py-3 sm:py-5">
 
-    <header class="bg-white rounded-lg shadow-md p-6 mb-4">
-      <h1 class="text-2xl font-bold">
-        Match Summary
+    <header class="sticky top-0 z-40 -mx-4 mb-5 bg-slate-50/95 px-4 pb-3 pt-3 backdrop-blur">
+      <div class="app-shell-header mb-5">
+        <div class="brand-lockup">
+          <span class="brand-mark">CP</span>
+          <div class="min-w-0">
+            <p class="font-bold leading-tight text-slate-950">CricPulse</p>
+            <p class="text-xs font-semibold text-slate-500">Fast cricket scoring made simple</p>
+          </div>
+        </div>
+        <span class="chip bg-emerald-50 text-emerald-700">Summary</span>
+      </div>
+      <h1 class="mt-1 text-3xl font-bold">
+        Match summary
       </h1>
     </header>
 
-    <section class="bg-white rounded-lg shadow-md p-6">
-      <div id="summary-root"></div>
-    </section>
+    <main id="summary-root" class="space-y-4"></main>
 
   </div>
 

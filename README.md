@@ -15,3 +15,8 @@ Production-level cricket scoring application.
 - Ball-by-ball architecture
 - Responsive scoring UI
 - Production-level folder structure
+
+## 🛠️ Maintainer
+
+Developed and maintained with precision by **[Anand Yelloju](https://github.com/anandyelloju)**. 
+Feel free to reach out for feature suggestions or collaboration!

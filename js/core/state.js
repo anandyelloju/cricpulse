@@ -18,11 +18,17 @@ export const state = {
     },
 
     tossWinner: null,
+    tossDecision: null,
     battingFirst: null,
 
     currentInnings: 1,
+    maxOvers: 5,
+    playerCount: 6,
 
     winner: null,
+    resultText: "",
+    superOverReady: false,
+    inningsRecords: [],
   },
 
   innings: {
@@ -46,6 +52,7 @@ export const state = {
     nextBatterIndex: 2,
 
     target: null,
+    pendingBowlerSelection: false,
 
     eventHistory: [],
     isReplaying: false,
@@ -73,7 +80,10 @@ export function resetInningsState() {
     nonStriker: null,
     currentBowler: null,
 
+    nextBatterIndex: 2,
+
     target: null,
+    pendingBowlerSelection: false,
 
     eventHistory: [],
     isReplaying: false,

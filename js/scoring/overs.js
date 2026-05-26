@@ -8,6 +8,7 @@ export function updateOverProgress() {
     state.innings.balls = 0;
 
     rotateStrike();
+    state.innings.pendingBowlerSelection = true;
   }
 }
 
@@ -21,6 +22,10 @@ export function rotateStrike() {
 
 export function updateBowlerOvers() {
   const bowler = state.innings.currentBowler;
+  const ballsBowled = (bowler.ballsBowled || 0) + 1;
+  const overs = Math.floor(ballsBowled / 6);
+  const balls = ballsBowled % 6;
 
-  bowler.overs = `${state.innings.overs}.${state.innings.balls}`;
+  bowler.ballsBowled = ballsBowled;
+  bowler.overs = `${overs}.${balls}`;
 }

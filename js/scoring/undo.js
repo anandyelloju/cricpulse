@@ -56,6 +56,7 @@ function replayInnings() {
 
   bowlingTeam.players.forEach((player) => {
     player.overs = 0;
+    player.ballsBowled = 0;
     player.runsConceded = 0;
     player.wickets = 0;
   });
@@ -76,11 +77,11 @@ function replayEvent(event) {
       break;
 
     case "WIDE":
-      addWide();
+      addWide(event.runs || 0);
       break;
 
     case "NO_BALL":
-      addNoBall();
+      addNoBall(event.runs || 0);
       break;
 
     case "BYE":
@@ -92,7 +93,7 @@ function replayEvent(event) {
       break;
 
     case "WICKET":
-      addWicket();
+      addWicket(event.options || {});
       break;
   }
 }

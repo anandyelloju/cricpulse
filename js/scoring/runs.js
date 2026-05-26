@@ -2,7 +2,7 @@ import { state } from "../core/state.js";
 import { generateId } from "../core/utils.js";
 import { rotateStrike, updateBowlerOvers, updateOverProgress } from "./overs.js";
 import { recordEvent } from "./undo.js";
-import { checkMatchWinner } from "./innings.js";
+import { checkMatchWinner, checkOverLimit } from "./innings.js";
 
 export function addRuns(runs) {
   const striker = state.innings.striker;
@@ -36,6 +36,7 @@ export function addRuns(runs) {
 
   updateBowlerOvers();
   checkMatchWinner();
+  checkOverLimit();
 }
 
 function createBallEvent(runs) {

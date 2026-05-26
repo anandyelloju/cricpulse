@@ -2,14 +2,15 @@ import { state } from "../core/state.js";
 import { generateId } from "../core/utils.js";
 import { updateOverProgress, updateBowlerOvers } from "./overs.js";
 import { recordEvent } from "./undo.js";
-import { endInnings } from "./innings.js";
+import { checkOverLimit, endInnings } from "./innings.js";
 
-export function addWicket() {
+export function addWicket(options = {}) {
   recordEvent({
     action: "WICKET",
+    options,
   });
 
-  const striker = state.innings.striker;
+  const striker = getDismissedPlayer(options.dismissedPlayerId);
   const bowler = state.innings.currentBowler;
 
   striker.isOut = true;
@@ -17,28 +18,44 @@ export function addWicket() {
   state.innings.wickets += 1;
   bowler.wickets += 1;
 
-  createWicketEvent();
+  createWicketEvent(striker, options.dismissalType);
   updateOverProgress();
-  assignNextBatter();
+  assignNextBatter(striker, options.newBatterId);
   updateBowlerOvers();
   checkInningsCompletion();
+  checkOverLimit();
 }
 
-function assignNextBatter() {
+function getDismissedPlayer(playerId) {
+  const batters = [state.innings.striker, state.innings.nonStriker].filter(Boolean);
+
+  return batters.find((player) => player.id === playerId) || state.innings.striker;
+}
+
+function assignNextBatter(dismissedPlayer, newBatterId) {
   const players = state.innings.battingTeam.players;
 
+  const selected = players.find((player) => player.id === newBatterId && !player.isOut);
   const nextIndex = state.innings.nextBatterIndex;
+  const nextBatter = selected || players[nextIndex];
 
-  if (nextIndex >= players.length) {
+  if (!nextBatter) {
     return;
   }
 
-  state.innings.striker = players[nextIndex];
+  if (dismissedPlayer.id === state.innings.nonStriker?.id) {
+    state.innings.nonStriker = nextBatter;
+  } else {
+    state.innings.striker = nextBatter;
+  }
 
-  state.innings.nextBatterIndex += 1;
+  state.innings.nextBatterIndex = Math.max(
+    state.innings.nextBatterIndex + 1,
+    players.findIndex((player) => player.id === nextBatter.id) + 1,
+  );
 }
 
-function createWicketEvent() {
+function createWicketEvent(player, dismissalType) {
   const event = {
     id: generateId("ball"),
 
@@ -49,7 +66,8 @@ function createWicketEvent() {
 
     runs: 0,
 
-    strikerId: state.innings.striker.id,
+    strikerId: player.id,
+    dismissalType: dismissalType || "Wicket",
 
     timestamp: Date.now(),
   };

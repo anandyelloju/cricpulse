@@ -1,60 +1,65 @@
 import { state } from "../core/state.js";
 import { generateId } from "../core/utils.js";
 import { EXTRA_TYPES } from "../core/constants.js";
-import { rotateStrike, updateOverProgress } from "./overs.js";
+import {
+  rotateStrike,
+  updateBowlerOvers,
+  updateOverProgress,
+} from "./overs.js";
 import { recordEvent } from "./undo.js";
-import { endInnings, checkMatchWinner } from "./innings.js";
+import { checkMatchWinner, checkOverLimit } from "./innings.js";
 
-function checkChaseCompletion() {
-  if (
-    state.match.currentInnings === 2 &&
-    state.innings.target &&
-    state.innings.totalRuns >= state.innings.target
-  ) {
-    endInnings();
-    return true;
-  }
-  return false;
-}
-
-export function addWide() {
-  state.innings.totalRuns += 1;
+export function addWide(runs = 1) {
+  const total = normalizeExtraRuns(runs, 1);
+  state.innings.totalRuns += total;
   const bowler = state.innings.currentBowler;
 
-  bowler.runsConceded += 1;
+  bowler.runsConceded += total;
 
   recordEvent({
     action: "WIDE",
+    runs: total,
   });
 
   createExtraEvent({
     extraType: EXTRA_TYPES.WIDE,
-    runs: 1,
+    runs: total,
   });
+
+  if (getCompletedRunsFromIllegalDelivery(total) % 2 !== 0) {
+    rotateStrike();
+  }
 
   checkMatchWinner();
 }
 
-export function addNoBall() {
-  state.innings.totalRuns += 1;
+export function addNoBall(runs = 0) {
+  const total = normalizeExtraRuns(runs, 0);
+  state.innings.totalRuns += total;
   const bowler = state.innings.currentBowler;
 
-  bowler.runsConceded += 1;
+  bowler.runsConceded += total;
 
   recordEvent({
     action: "NO_BALL",
+    runs: total,
   });
 
   createExtraEvent({
     extraType: EXTRA_TYPES.NO_BALL,
-    runs: 1,
+    runs: total,
   });
+
+  if (getCompletedRunsFromIllegalDelivery(total) % 2 !== 0) {
+    rotateStrike();
+  }
 
   checkMatchWinner();
 }
 
 export function addBye(runs) {
-  state.innings.totalRuns += runs;
+  const total = normalizeExtraRuns(runs, 0);
+  state.innings.totalRuns += total;
 
   const striker = state.innings.striker;
 
@@ -62,25 +67,28 @@ export function addBye(runs) {
 
   recordEvent({
     action: "BYE",
-    runs,
+    runs: total,
   });
 
   createExtraEvent({
     extraType: EXTRA_TYPES.BYE,
-    runs,
+    runs: total,
   });
 
   updateOverProgress();
+  updateBowlerOvers();
 
-  if (runs % 2 !== 0) {
+  if (total % 2 !== 0) {
     rotateStrike();
   }
 
   checkMatchWinner();
+  checkOverLimit();
 }
 
 export function addLegBye(runs) {
-  state.innings.totalRuns += runs;
+  const total = normalizeExtraRuns(runs, 0);
+  state.innings.totalRuns += total;
 
   const striker = state.innings.striker;
 
@@ -88,21 +96,37 @@ export function addLegBye(runs) {
 
   recordEvent({
     action: "LEG_BYE",
-    runs,
+    runs: total,
   });
 
   createExtraEvent({
     extraType: EXTRA_TYPES.LEG_BYE,
-    runs,
+    runs: total,
   });
 
   updateOverProgress();
+  updateBowlerOvers();
 
-  if (runs % 2 !== 0) {
+  if (total % 2 !== 0) {
     rotateStrike();
   }
 
   checkMatchWinner();
+  checkOverLimit();
+}
+
+function normalizeExtraRuns(value, fallback) {
+  const runs = Number(value);
+
+  if (!Number.isFinite(runs) || runs < 0) {
+    return fallback;
+  }
+
+  return runs;
+}
+
+function getCompletedRunsFromIllegalDelivery(total) {
+  return Math.max(total - 1, 0);
 }
 
 function createExtraEvent({ extraType, runs }) {

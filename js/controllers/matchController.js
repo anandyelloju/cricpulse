@@ -25,7 +25,7 @@ export function initializeMatchState() {
 export function resetMatch() {
   clearMatchState();
 
-  window.location.reload();
+  window.location.href = "./index.html";
 }
 
 export function hasActiveMatch() {

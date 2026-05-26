@@ -1,8 +1,10 @@
 import { state, resetInningsState } from "../core/state.js";
 
-import { MATCH_STATUS } from "../core/constants.js";
+import { INNINGS_STATUS, MATCH_STATUS, STORAGE_KEYS } from "../core/constants.js";
 
 export function endInnings() {
+  saveCurrentInningsRecord();
+
   if (state.match.currentInnings === 1) {
     startSecondInnings();
 
@@ -54,6 +56,8 @@ function startSecondInnings() {
 
 function completeMatch() {
   state.match.status = MATCH_STATUS.COMPLETED;
+  state.innings.status = INNINGS_STATUS.COMPLETED;
+  state.innings.pendingBowlerSelection = false;
 
   const battingScore = state.innings.totalRuns;
 
@@ -65,13 +69,39 @@ function completeMatch() {
 
   if (battingScore >= target) {
     state.match.winner = state.innings.battingTeam.name;
+    const wicketsLeft = state.innings.battingTeam.players.length - 1 - state.innings.wickets;
+    const ballsRemaining = getBallsRemaining();
+    const ballText = ballsRemaining === 1 ? "ball" : "balls";
+    state.match.resultText = `${state.match.winner} won by ${wicketsLeft} wickets with ${ballsRemaining} ${ballText} remaining`;
 
     return;
   }
 
   if (battingScore < target) {
+    if (battingScore === target - 1) {
+      state.match.winner = "Match tied";
+      state.match.resultText = "Match tied";
+      state.match.superOverReady = true;
+      return;
+    }
+
     state.match.winner = state.innings.bowlingTeam.name;
+    const margin = target - battingScore - 1;
+    state.match.resultText = `${state.match.winner} won by ${margin} runs`;
   }
+
+}
+
+export function prepareReplayMatch() {
+  localStorage.setItem(
+    STORAGE_KEYS.REPLAY_SETUP,
+    JSON.stringify({
+      teamA: state.match.teamA,
+      teamB: state.match.teamB,
+      maxOvers: state.match.maxOvers,
+      playerCount: state.match.playerCount,
+    }),
+  );
 }
 
 function resetPlayerStats(team) {
@@ -83,6 +113,7 @@ function resetPlayerStats(team) {
     player.isOut = false;
 
     player.overs = 0;
+    player.ballsBowled = 0;
     player.runsConceded = 0;
     player.wickets = 0;
   });
@@ -98,6 +129,43 @@ export function checkMatchWinner() {
   }
 
   if (state.innings.totalRuns >= state.innings.target) {
+    saveCurrentInningsRecord();
     completeMatch();
   }
+}
+
+export function checkOverLimit() {
+  if (state.match.status === MATCH_STATUS.COMPLETED) {
+    return;
+  }
+
+  if (state.innings.overs >= state.match.maxOvers && state.innings.balls === 0) {
+    endInnings();
+  }
+}
+
+function saveCurrentInningsRecord() {
+  const record = {
+    number: state.match.currentInnings,
+    battingTeam: structuredClone(state.innings.battingTeam),
+    bowlingTeam: structuredClone(state.innings.bowlingTeam),
+    totalRuns: state.innings.totalRuns,
+    wickets: state.innings.wickets,
+    overs: state.innings.overs,
+    balls: state.innings.balls,
+    target: state.innings.target,
+    ballHistory: structuredClone(state.innings.ballHistory),
+  };
+  const existingIndex = state.match.inningsRecords.findIndex((item) => item.number === state.match.currentInnings);
+
+  if (existingIndex >= 0) {
+    state.match.inningsRecords[existingIndex] = record;
+    return;
+  }
+
+  state.match.inningsRecords.push(record);
+}
+
+function getBallsRemaining() {
+  return Math.max(state.match.maxOvers * 6 - (state.innings.overs * 6 + state.innings.balls), 0);
 }
