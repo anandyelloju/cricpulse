@@ -216,6 +216,87 @@ main > .app-card,
     transform 0.18s ease-out;
 }
 
+.seo-content {
+  color: #334155;
+}
+
+.seo-section,
+.seo-grid > article {
+  border-top: 1px solid #e6edf5;
+  padding: 2rem 0;
+}
+
+.seo-section h2,
+.seo-grid h2 {
+  color: #0f172a;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+}
+
+.seo-section p,
+.seo-grid p,
+.seo-section li {
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.seo-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.seo-list {
+  display: grid;
+  gap: 0.625rem;
+  list-style: disc;
+  padding-left: 1.25rem;
+}
+
+.seo-content details {
+  border-top: 1px solid #e6edf5;
+  padding: 1rem 0;
+}
+
+.seo-content summary {
+  color: #0f172a;
+  cursor: pointer;
+  font-weight: 750;
+}
+
+.seo-content details p {
+  margin-top: 0.625rem;
+}
+
+.seo-links {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.seo-links a,
+.site-footer a {
+  color: #1d4ed8;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.seo-links a:hover,
+.site-footer a:hover {
+  text-decoration: underline;
+}
+
+.site-footer {
+  border-top: 1px solid #e6edf5;
+  color: #64748b;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  margin: 0 auto;
+  max-width: 64rem;
+  padding: 1.5rem 1rem 2rem;
+}
+
 .chip {
   align-items: center;
   border: 1px solid #dbe6f0;
@@ -364,6 +445,17 @@ details > div {
 @media (min-width: 640px) {
   .modal-backdrop {
     align-items: center;
+  }
+}
+
+@media (min-width: 768px) {
+  .seo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .seo-section h2,
+  .seo-grid h2 {
+    font-size: 1.875rem;
   }
 }
 

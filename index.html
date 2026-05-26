@@ -3,47 +3,167 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="CricPulse is a free online cricket score calculator and live scoring app for local matches, tournaments, and practice games."
-    />
+    <meta name="theme-color" content="#2f6fed" />
+    <meta name="description" content="CricPulse is a free mobile-first cricket score calculator, online cricket scorer, and live cricket scoring app for local matches, tournaments, and practice games." />
+    <meta name="keywords" content="cricket score calculator, cricket scoring app, online cricket scorer, live cricket scoring, cricket scorecard app, cricket run rate calculator, local cricket scoring app" />
+    <link rel="canonical" href="https://anandyelloju.github.io/cricpulse/" />
 
-    <title>
-      CricPulse - Free Online Cricket Score Calculator & Live Scoring App
-    </title>
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CricPulse" />
+    <meta property="og:title" content="CricPulse - Free Online Cricket Score Calculator & Live Scoring App" />
+    <meta property="og:description" content="Create matches, run the toss, score every ball, track overs, calculate run rate, and export cricket scorecards from a fast mobile-first scorer." />
+    <meta property="og:url" content="https://anandyelloju.github.io/cricpulse/" />
+    <meta property="og:image" content="https://anandyelloju.github.io/cricpulse/assets/icons/cricpulse-icon-512.png" />
 
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="CricPulse - Free Online Cricket Score Calculator & Live Scoring App" />
+    <meta name="twitter:description" content="A free online cricket scorer for live scoring, run rate calculation, over history, innings management, and scorecard exports." />
+    <meta name="twitter:image" content="https://anandyelloju.github.io/cricpulse/assets/icons/cricpulse-icon-512.png" />
+
+    <title>CricPulse - Free Online Cricket Score Calculator & Live Scoring App</title>
+
+    <link rel="icon" href="./assets/icons/cricpulse-icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./assets/icons/cricpulse-icon-192.png" />
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" />
     <script src="https://cdn.tailwindcss.com"></script>
-
     <link rel="stylesheet" href="./assets/css/style.css" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": ["SoftwareApplication", "WebApplication"],
+        "name": "CricPulse",
+        "applicationCategory": "SportsApplication",
+        "operatingSystem": "Web, iOS, Android, Windows, macOS",
+        "url": "https://anandyelloju.github.io/cricpulse/",
+        "description": "CricPulse is a free online cricket score calculator and live cricket scoring app for local cricket matches, tournaments, and practice games.",
+        "featureList": [
+          "Live cricket scoring",
+          "Cricket score calculator",
+          "Toss and innings management",
+          "Over history",
+          "Run rate calculation",
+          "Extras and wicket tracking",
+          "Printable cricket scorecards",
+          "Mobile-first scoring interface"
+        ],
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    </script>
   </head>
 
   <body class="min-h-screen bg-slate-50 text-slate-950" data-page="setup">
     <div class="mx-auto max-w-2xl px-4 pb-28 pt-3 sm:pt-5">
-      <header
-        class="sticky top-0 z-40 -mx-4 mb-5 bg-slate-50/95 px-4 pb-3 pt-3 backdrop-blur"
-      >
-        <div class="app-shell-header mb-5">
-          <div class="brand-lockup">
+      <header class="sticky top-0 z-40 -mx-4 mb-5 bg-slate-50/95 px-4 pb-3 pt-3 backdrop-blur">
+        <nav class="app-shell-header mb-5" aria-label="Primary navigation">
+          <a class="brand-lockup" href="./index.html" aria-label="CricPulse home">
             <span class="brand-mark">CP</span>
-            <div class="min-w-0">
-              <p class="font-bold leading-tight text-slate-950">CricPulse</p>
-              <p class="text-xs font-semibold text-slate-500">
-                Fast cricket scoring
-              </p>
-            </div>
-          </div>
-          <span class="chip bg-blue-50 text-blue-700">Setup</span>
-        </div>
-        <h1 class="mt-1 text-3xl font-bold text-slate-950">Match setup</h1>
+            <span class="min-w-0">
+              <span class="block font-bold leading-tight text-slate-950">CricPulse</span>
+              <span class="block text-xs font-semibold text-slate-500">Fast cricket scoring</span>
+            </span>
+          </a>
+          <a class="chip bg-blue-50 text-blue-700" href="#cricket-scoring-guide">Guide</a>
+        </nav>
+        <h1 class="mt-1 text-3xl font-bold text-slate-950">Free cricket score calculator</h1>
 
         <p class="mt-2 text-sm leading-6 text-slate-600">
-          Build the match in three quick steps. Player names can be skipped and
-          CricPulse will fill sensible defaults.
+          Set up a local cricket match, run the toss, choose opening players, and use CricPulse as a mobile-first online cricket scorer.
         </p>
       </header>
 
-      <main id="setup-root" class="space-y-4"></main>
+      <main>
+        <section id="setup-root" class="space-y-4" aria-label="Match setup form"></section>
+      </main>
     </div>
+
+    <section class="seo-content mx-auto max-w-5xl px-4 pb-16" aria-label="CricPulse cricket scoring guide">
+      <section class="seo-section" aria-labelledby="what-is-cricpulse">
+        <p class="text-sm font-semibold uppercase text-blue-600">Cricket scoring app</p>
+        <h2 id="what-is-cricpulse">What is CricPulse?</h2>
+        <p>
+          CricPulse is a free online cricket score calculator built for street cricket, school matches, club fixtures, box cricket, and practice games. It helps scorers record every ball, manage innings, calculate run rate, track extras, and prepare a clean cricket scorecard from a phone.
+        </p>
+      </section>
+
+      <section class="seo-grid" aria-labelledby="why-use-cricpulse">
+        <article>
+          <h2 id="why-use-cricpulse">Why use CricPulse?</h2>
+          <p>
+            Paper scorebooks work, but live cricket scoring is faster when the scorer has run buttons, extras, wickets, bowler changes, and over history in one place. CricPulse keeps the scoring flow simple so local matches can focus on the game.
+          </p>
+        </article>
+        <article>
+          <h2>Mobile scoring benefits</h2>
+          <p>
+            The interface is designed for one-handed scoring on mobile. Large buttons, quick match setup, visible striker and bowler details, and persistent controls reduce mistakes during fast overs.
+          </p>
+        </article>
+      </section>
+
+      <section class="seo-section" aria-labelledby="features">
+        <h2 id="features">Features for live cricket scoring</h2>
+        <ul class="seo-list">
+          <li>Live scoring for runs, wickets, wides, no balls, byes, and leg byes.</li>
+          <li>Toss system with batting or bowling decision support.</li>
+          <li>Innings management for limited-over local cricket matches.</li>
+          <li>Over history and recent ball tracking for transparent score review.</li>
+          <li>Run rate, strike rate, economy rate, batting card, and bowling card.</li>
+          <li>Printable scorecards for sharing match results after the game.</li>
+        </ul>
+      </section>
+
+      <section class="seo-grid" aria-labelledby="how-scoring-works">
+        <article id="cricket-scoring-guide">
+          <h2 id="how-scoring-works">How scoring works</h2>
+          <p>
+            A legal delivery adds one ball to the over. Batter runs increase the team total and the batter score. Extras such as wides and no balls add runs without always counting as legal balls. Wickets reduce the batting side's available players and may require the next batter to come in.
+          </p>
+        </article>
+        <article>
+          <h2>Cricket scoring guide</h2>
+          <p>
+            For a simple local match, set the teams, choose overs, complete the toss, pick the striker, non-striker, and opening bowler, then score ball by ball. CricPulse updates the live scorecard, current over, run rate, and player statistics automatically.
+          </p>
+        </article>
+      </section>
+
+      <section class="seo-section" aria-labelledby="faq">
+        <h2 id="faq">Cricket scoring FAQ</h2>
+        <details>
+          <summary>How do I calculate cricket score online?</summary>
+          <p>Open CricPulse, enter teams and overs, run the toss, then tap the matching run, extra, or wicket button after every ball. The app updates total runs, wickets, overs, and run rate.</p>
+        </details>
+        <details>
+          <summary>How does cricket run rate work?</summary>
+          <p>Run rate is total runs divided by overs faced. If a team scores 60 runs in 10 overs, the run rate is 6.00 runs per over.</p>
+        </details>
+        <details>
+          <summary>How are wides and no balls calculated?</summary>
+          <p>A wide or no ball normally adds one extra run to the batting team. Additional runs can also be added, and these deliveries usually do not count as legal balls in the over.</p>
+        </details>
+      </section>
+
+      <section class="seo-section" aria-labelledby="more-guides">
+        <h2 id="more-guides">Cricket scoring resources</h2>
+        <nav class="seo-links" aria-label="Cricket scoring resources">
+          <a href="./pages/cricket-scoring-rules.html">Cricket scoring rules</a>
+          <a href="./pages/run-rate-calculator-guide.html">Run rate calculator guide</a>
+          <a href="./pages/cricket-extras-guide.html">Cricket extras guide</a>
+          <a href="./pages/how-cricket-scoring-works.html">How cricket scoring works</a>
+        </nav>
+      </section>
+    </section>
+
+    <footer class="site-footer">
+      <p>CricPulse - a fast mobile-first cricket scorecard app for local matches.</p>
+      <p><a href="./index.html">Score a match</a> <span aria-hidden="true">|</span> <a href="./pages/live.html">Live scoring</a> <span aria-hidden="true">|</span> <a href="./pages/summary.html">Scorecard summary</a></p>
+    </footer>
 
     <script type="module" src="./js/app.js"></script>
   </body>

@@ -25,7 +25,7 @@ export function initializeMatchState() {
 export function resetMatch() {
   clearMatchState();
 
-  window.location.href = "./index.html";
+  window.location.href = window.location.pathname.includes("/pages/") ? "../index.html" : "./index.html";
 }
 
 export function hasActiveMatch() {

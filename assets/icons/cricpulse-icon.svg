@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">CricPulse app icon</title>
+  <rect width="512" height="512" rx="96" fill="#2f6fed"/>
+  <circle cx="358" cy="154" r="54" fill="#22c55e"/>
+  <path fill="#ffffff" d="M126 338c-22-22-34-51-34-84 0-68 50-120 121-120 48 0 88 22 108 58l-65 36c-8-15-23-25-43-25-30 0-51 21-51 51s21 51 52 51c20 0 36-9 45-25l64 36c-20 36-61 58-109 58-36 0-66-12-88-36z"/>
+  <path fill="#eaf2ff" d="M319 374V214h68c43 0 73 25 73 64 0 38-30 63-73 63h-13v33h-55zm55-81h10c12 0 21-5 21-16s-9-16-21-16h-10v32z"/>
+</svg>

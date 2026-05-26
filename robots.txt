@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://anandyelloju.github.io/cricpulse/sitemap.xml

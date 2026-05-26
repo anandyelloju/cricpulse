@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#2f6fed" />
+    <meta name="description" content="Use CricPulse for live cricket scoring with ball-by-ball controls, over history, wickets, extras, run rate, batting cards, and bowling cards." />
+    <link rel="canonical" href="https://anandyelloju.github.io/cricpulse/pages/live.html" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="CricPulse" />
+    <meta property="og:title" content="Live Cricket Scoring - CricPulse Online Cricket Scorer" />
+    <meta property="og:description" content="Score a cricket match live with quick run buttons, extras, wickets, current over history, and mobile-first cricket scorecard controls." />
+    <meta property="og:url" content="https://anandyelloju.github.io/cricpulse/pages/live.html" />
+    <meta property="og:image" content="https://anandyelloju.github.io/cricpulse/assets/icons/cricpulse-icon-512.png" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Live Cricket Scoring - CricPulse" />
+    <meta name="twitter:description" content="A mobile-first online cricket scorer for local matches and tournaments." />
+    <meta name="twitter:image" content="https://anandyelloju.github.io/cricpulse/assets/icons/cricpulse-icon-512.png" />
+
+    <title>Live Cricket Scoring - CricPulse Online Cricket Scorer</title>
+
+    <link rel="icon" href="../assets/icons/cricpulse-icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="../assets/icons/cricpulse-icon-192.png" />
+    <link rel="manifest" href="../manifest.json" />
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+  </head>
+
+  <body class="min-h-screen bg-slate-50 text-slate-950" data-page="live">
+    <div class="mx-auto max-w-5xl pb-48">
+      <header class="sticky top-0 z-30 bg-slate-50/95 px-4 py-3 backdrop-blur">
+        <nav class="app-shell-header mx-auto mb-3 max-w-5xl" aria-label="Live match navigation">
+          <a class="brand-lockup" href="../index.html" aria-label="CricPulse home">
+            <span class="brand-mark">CP</span>
+            <span class="min-w-0">
+              <span class="block font-bold leading-tight text-slate-950">CricPulse</span>
+              <span class="block text-xs font-semibold text-slate-500">Live scoring companion</span>
+            </span>
+          </a>
+          <span class="chip live-pulse bg-red-50 text-red-700">Live</span>
+        </nav>
+        <section id="scoreboard-root" aria-label="Live cricket scoreboard"></section>
+      </header>
+
+      <main class="space-y-4 px-4 py-4">
+        <section class="app-card" aria-labelledby="recent-balls-title">
+          <div class="mb-3 flex items-center justify-between gap-3">
+            <h1 id="recent-balls-title" class="section-title">Live cricket scoring</h1>
+            <span class="text-xs font-semibold text-slate-500">Current over</span>
+          </div>
+          <div id="history-root"></div>
+        </section>
+
+        <section class="app-card" aria-label="Current batters and bowler">
+          <div id="players-root"></div>
+        </section>
+
+        <section class="app-card" aria-labelledby="over-history-title">
+          <details>
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-3">
+              <span id="over-history-title" class="section-title">Over history</span>
+              <span class="text-xs font-semibold text-slate-500">Tap to expand</span>
+            </summary>
+            <div id="over-history-root" class="mt-3"></div>
+          </details>
+        </section>
+
+        <section class="grid gap-4 lg:grid-cols-2" aria-label="Live scorecard">
+          <article class="app-card">
+            <h2 class="section-title mb-3">Batting scorecard</h2>
+            <div id="batting-root"></div>
+          </article>
+
+          <article class="app-card">
+            <h2 class="section-title mb-3">Bowling scorecard</h2>
+            <div id="bowling-root"></div>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <section id="controls-root" class="fixed inset-x-0 bottom-0 z-30 border-t border-slate-200 bg-white/95 p-3 shadow-2xl backdrop-blur" aria-label="Ball by ball scoring controls"></section>
+    <div id="modal-root"></div>
+
+    <script type="module" src="../js/app.js"></script>
+  </body>
+</html>

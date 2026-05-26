@@ -145,13 +145,13 @@ function handleSummaryActions(event) {
   if (action === "new-match") {
     localStorage.removeItem(STORAGE_KEYS.REPLAY_SETUP);
     clearMatchState();
-    window.location.href = "./index.html";
+    window.location.href = "../index.html";
   }
 
   if (action === "replay-match") {
     prepareReplayMatch();
     clearMatchState();
-    window.location.href = "./index.html";
+    window.location.href = "../index.html";
   }
 
   if (action === "download-scorecard") {

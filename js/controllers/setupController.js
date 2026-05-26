@@ -378,7 +378,7 @@ function startMatch() {
 
   localStorage.removeItem(STORAGE_KEYS.REPLAY_SETUP);
   saveMatchState();
-  window.location.href = "./live.html";
+  window.location.href = "./pages/live.html";
 }
 
 function createTeam(teamKey, name) {
